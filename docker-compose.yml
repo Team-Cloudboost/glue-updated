@@ -11,7 +11,7 @@ services:
       - php
     build: 
       context: ./Dockerfiles
-      dockerfile: dockerfile-nginx
+      dockerfile: dockerfile-frontend
       args:
         - WEB_ADDRESS=${WEB_ADDRESS}
         - REPO_LINK=${REPO_LINK}
@@ -41,7 +41,7 @@ services:
       - db
     build:
       context: ./Dockerfiles
-      dockerfile: dockerfile-php
+      dockerfile: dockerfile-backend
       args:
         - APP_DB=${APP_DB}
         - APP_DB_USER=${APP_DB_USER}
@@ -64,7 +64,10 @@ services:
   db:
     env_file:
       - .env
-    image: mysql
+    build:
+      context: ./Dockerfiles
+      dockerfile: dockerfile-backend
+    image: glue-db
     container_name: glue-db
     restart: unless-stopped
     expose:
