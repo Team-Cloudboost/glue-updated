@@ -34,8 +34,6 @@ services:
     container_name: glue-backend
     restart: unless-stopped
     working_dir: /public_html
-    volumes:
-      - glue-app:/public_html
     expose:
       - 9000
     networks:
