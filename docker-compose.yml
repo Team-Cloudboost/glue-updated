@@ -16,8 +16,6 @@ services:
     container_name: glue-frontend
     restart: unless-stopped
     working_dir: /public_html
-    volumes:
-      - glue-app:/public_html
     ports:
       - 80:80
     networks:
@@ -56,11 +54,6 @@ services:
     restart: unless-stopped
     expose:
       - 3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PWD}
-      - MYSQL_USER=${APP_DB_USER}
-      - MYSQL_PASSWORD=${APP_DB_PASS}
-      - MYSQL_DATABASE=${APP_DB}
     networks:
       - glue
 
