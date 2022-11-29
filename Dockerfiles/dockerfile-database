@@ -1,0 +1,30 @@
+FROM ubuntu
+
+######DATBASE COFIG START##################
+ENV MYSQL_ROOT_PASSWORD=StrongPass
+ENV APP_DB_PORT=3306
+ENV APP_DB=laravel
+ENV APP_DB_USER=laravel
+ENV APP_DB_PASS=laravel
+
+
+######DATBASE COFIG END####################
+
+ENV DB_DUMP_FILE_LINK=https://raw.githubusercontent.com/Team-Cloudboost/glue-with-composer-preinstalled/main/bahonbdc_ticket.sql
+
+WORKDIR /glue
+
+COPY ./Entrypoint/database-docker-entrypoint.sh /database-docker-entrypoint.sh
+
+ENV TZ=Asia/Dhaka \
+    DEBIAN_FRONTEND=noninteractive
+
+RUN apt update; apt install mysql-server wget ca-certificates -y --no-install-recommends; 
+    #wget -O ./glue_dump.sql ${DB_DUMP_FILE_LINK}; 
+     
+RUN ["chmod", "+x", "/database-docker-entrypoint.sh"]    
+
+ENTRYPOINT [ "sh", "/database-docker-entrypoint.sh" ]
+
+
+EXPOSE 3306
