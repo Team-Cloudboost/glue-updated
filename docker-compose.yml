@@ -46,7 +46,7 @@ services:
       - .env
     build:
       context: ./Dockerfiles
-      dockerfile: dockerfile-backend
+      dockerfile: dockerfile-database
     image: glue-db
     container_name: glue-db
     restart: unless-stopped
