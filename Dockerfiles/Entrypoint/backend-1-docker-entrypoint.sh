@@ -10,5 +10,6 @@ chown -R www-data:www-data /public_html/$REPO_PROJECT_FOLDER/storage;
 chown -R www-data:www-data /public_html/$REPO_PROJECT_FOLDER/bootstrap/cache;
 /usr/sbin/service php8.1-fpm start
 cd /public_html/$REPO_PROJECT_FOLDER;
+sleep 5;
 php artisan $ARTISAN_CMD
 tail -f /dev/null
